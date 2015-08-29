@@ -17,6 +17,7 @@ def evaluate_guess(guess, answer)
   else
     evaluation = []
 
+    # add a line
     if (guess - answer).abs > 3
       evaluation.push(:cold)
     elsif (guess - answer).abs == 1
