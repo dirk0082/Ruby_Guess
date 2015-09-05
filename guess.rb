@@ -18,6 +18,7 @@ def evaluate_guess(guess, answer)
     evaluation = []
 
     # add a line
+    #refactor starting here
     if (guess - answer).abs > 3
       evaluation.push(:cold)
     elsif (guess - answer).abs == 1
@@ -33,6 +34,7 @@ def evaluate_guess(guess, answer)
     end
     return evaluation
   end
+  #refactor ending here
 end
 
 def assert(expr)
