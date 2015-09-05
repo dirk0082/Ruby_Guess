@@ -5,6 +5,7 @@
 # 2. make it so that after every guess the answer moves randomly by 1
 #
 
+
 def get_response(prompt)
   print prompt
   $stdout.flush
@@ -19,6 +20,12 @@ def evaluate_guess(guess, answer)
 
     # add a line
     #refactor starting here
+    #difference = guess - answer
+    #rating, if abs = 0 then correct
+    # if abs = 1, then hot
+    # if abs 1 < 3, then warm
+    # if abs > 3, then cold
+    def evaluate_response(temperature, degree)
     if (guess - answer).abs > 3
       evaluation.push(:cold)
     elsif (guess - answer).abs == 1
@@ -28,12 +35,24 @@ def evaluate_guess(guess, answer)
     end
 
     if guess < answer then
-      evaluation.push(:low)
+      degree = (:low)
     else
-      evaluation.push(:high)
+      degree = (:high)
     end
     return evaluation
-  end
+    when [:cold, :low]
+      puts "you're cold and too low"
+    when [:cold, :high]
+      puts "you're cold and too high"
+    when [:warm, :low]
+      puts "you're warm but too low"
+    when [:warm, :high]
+      puts "you're warm but too high"
+    when [:hot, :low]
+      puts "you're hot but too low"
+    when [:hot, :high]
+      puts "you're hot but too high"
+    end
   #refactor ending here
 end
 
@@ -59,19 +78,9 @@ loop do
     case guess_evaluation
     when :correct
       break
-    when [:cold, :low]
-      puts "you're cold and too low"
-    when [:cold, :high]
-      puts "you're cold and too high"
-    when [:warm, :low]
-      puts "you're warm but too low"
-    when [:warm, :high]
-      puts "you're warm but too high"
-    when [:hot, :low]
-      puts "you're hot but too low"
-    when [:hot, :high]
-      puts "you're hot but too high"
-    end
+    incorrectness_evaluation = evaluate_response(temperature, degree)
+    case incorrectness_evaluation
+
   end
 
   continue = get_response("play again y/n: ").to_s
